@@ -1,0 +1,86 @@
+/* FocusTide-inspired typography and full-screen solid colors. */
+:root{font-family:"PingFang SC","PingFang TC",-apple-system,BlinkMacSystemFont,"Microsoft YaHei",sans-serif;font-weight:700}
+body{font-weight:700;transition:background .55s,color .35s}
+button,input,select,h1,h2,h3,strong,small,.brand strong,.brand strong span,.card-heading h2,.card-heading h2 span:not(.coral-dot),.plans-heading h1,.sheet-header h2,.summary-dialog h2,.stats-number strong,.stats-pair strong{font-weight:700}
+.ambient{display:none}
+.topbar{position:relative;z-index:2}
+.view{animation:fade-in .5s ease both}
+body[data-view="clock"] main,body[data-view="focus"] main{max-width:none;padding:0}
+.clock-view{min-height:calc(100dvh - 112px);display:flex;flex-direction:column;padding:0 8.5% 28px}
+.clock-hero{position:relative;inset:auto;min-height:320px;max-height:none;height:auto;flex:1;padding:18px 0 30px;pointer-events:none}
+.big-clock,.timer-number{font-family:Arial,"Helvetica Neue",sans-serif;font-size:clamp(104px,24vw,380px);font-weight:800;letter-spacing:-.055em;line-height:1;white-space:nowrap;margin:0;user-select:none;font-variant-numeric:tabular-nums;color:var(--text)}
+.colon{font-weight:800;top:-.045em;margin:0 .015em}
+footer,.focus-view .eyebrow,.timer-progress,.active-task,.keyboard-hint,.schedule{display:none!important}
+.clock-view .big-clock{font-size:clamp(104px,22vw,350px)}
+.dashboard{display:grid;width:100%;flex-shrink:0}
+.dashboard .plan-card,.dashboard .focus-card{height:380px;min-height:380px;padding:26px 29px;display:flex;flex-direction:column;min-width:0}
+.dashboard .card-heading{flex-shrink:0}
+#quick-tasks{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--text) 20%,transparent) transparent;margin-top:14px;padding-right:5px}
+#quick-tasks .task-row{flex-shrink:0;min-height:44px}
+#quick-tasks .empty-tasks{height:100%;justify-content:center;line-height:1.8;padding:25px 12px}
+.dashboard .add-task{flex-shrink:0;border-top:1px solid var(--line);margin-top:9px;padding-top:8px}
+.dashboard .mini-timer-row{flex-shrink:0;margin:20px 0}
+.dashboard .mini-time{font-size:72px;letter-spacing:-3px}
+.dashboard .round-button{width:52px;height:52px}
+.mini-context{padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 92%,var(--text) 8%);min-height:65px}
+.mini-context>span,.mini-session-grid span{font-size:10px;color:var(--muted);letter-spacing:.5px}
+.mini-context p{font-size:12px;line-height:1.6;margin:5px 0 0;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mini-session-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:12px;margin:15px 0}
+.mini-session-grid>div{display:flex;flex-direction:column;gap:5px}
+.mini-session-grid strong{font-size:12px;line-height:1.6}
+.dashboard .mini-bottom{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);line-height:1.5}
+.clock-view .glass{background:color-mix(in srgb,var(--bg) 96%,var(--text) 4%);border-color:color-mix(in srgb,var(--text) 8%,transparent);box-shadow:0 8px 35px #00000003}
+.clock-view .focus-card .primary{background:#ed816d;color:#fff}
+.clock-view .coral-dot{background:#ed816d}
+.mini-bottom,.clock-view .tiny-label{color:var(--muted)}
+.focus-view{position:fixed;inset:0;height:100dvh;pointer-events:none}
+.focus-top{position:absolute;top:132px;left:50%;transform:translateX(-50%);z-index:2;margin:0;pointer-events:auto;white-space:nowrap}
+.timer-hero{position:fixed;inset:0;min-height:0;height:100dvh;max-height:none;padding:0;pointer-events:none}
+.timer-number{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.timer-number.approx{font-size:clamp(90px,19vw,290px)}
+.timer-controls{position:absolute;bottom:52px;left:50%;transform:translateX(-50%);margin:0;pointer-events:auto;gap:26px}
+.start-button{padding:18px 38px;font-size:15px;min-width:175px}
+.control-secondary{width:49px;height:49px}
+.brand-icon,.icon-button,.text-button,.pill-button,.eyebrow,.tiny-label,.plans-heading .eyebrow,.filter-row button,.filter-row button.active,.aside-quote,.plan-footnote,.stats-card .pill-button{color:var(--text)}
+.brand strong span,.count{color:var(--muted)}
+.segmented,.dark .segmented{background:var(--glass);border-color:transparent;backdrop-filter:blur(18px)}
+.segmented button{color:var(--muted)}
+.segmented button.active{background:var(--text);color:var(--bg);box-shadow:none}
+.icon-button:hover,.pill-button:hover{background:var(--glass)}
+.pill-button{background:var(--glass);border-color:var(--line)}
+.primary,.dark .primary{background:var(--text);color:var(--bg);box-shadow:none}
+.primary:hover{background:var(--text);box-shadow:0 7px 20px #0002}
+.glass,.dark .glass{background:var(--glass);border-color:var(--line);box-shadow:none}
+.mini-time,.pip-time{font-family:Arial,"Helvetica Neue",sans-serif;font-weight:800}
+.plans-heading p,.stats-number span,.stats-pair span,.empty-tasks{color:var(--muted)}
+.add-task input::placeholder{color:var(--muted)}
+.task-row label{font-size:14px}
+.task-row.done .task-text{color:var(--muted)}
+.task-row input{border-color:var(--text)}
+.task-row input:checked{background-color:#241c1d;border-color:#241c1d}
+.filter-row button.active{border-color:var(--text)}
+.color-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+.color-grid label{display:flex;flex-direction:column;gap:10px;font-size:12px}
+.color-grid input{width:100%;height:42px;padding:0;border:0;border-radius:12px;background:none;cursor:pointer;overflow:hidden}
+.color-grid input::-webkit-color-swatch-wrapper{padding:0}
+.color-grid input::-webkit-color-swatch{border:0;border-radius:12px}
+.palette-presets{display:flex;gap:9px}
+.palette-presets button{border:1px solid var(--line);border-radius:9px;font-size:11px;padding:8px 12px}
+dialog{--bg:#fff8f5!important;--text:#302126!important;--muted:#76656a!important;--accent:#d64752!important;--accent-strong:#b92f3c!important;--line:#30212616!important;--glass:#30212607!important;--white:#fff!important;background:var(--bg);color:var(--text);font-weight:700}
+.dark dialog{--bg:#292324!important;--text:#fff3f3!important;--muted:#ccb8bc!important;--glass:#ffffff0a!important;--line:#ffffff20!important;--white:#403638!important;color-scheme:dark}
+dialog .settings-note,dialog .duration-fields label,dialog .setting-row select,dialog .notification-button>span:last-child{color:var(--muted)}
+dialog .tiny-label{color:var(--muted)}
+dialog .setting-row{font-size:12px}
+dialog .primary{background:var(--accent);color:white}
+dialog .palette-presets button:hover{color:var(--accent);border-color:var(--accent)}
+.pip-body main{padding:0}
+.pip-body .pip-time{font-size:76px;color:var(--text)}
+.pip-body .pip-head,.pip-body .pip-task,.pip-body .pip-clock,.pip-body .pip-status{color:var(--text)}
+.pip-body .start-button{padding:12px 24px;min-width:130px}
+.pip-body .coral-dot{background:var(--text)}
+body.zen .clock-hero,body.zen .timer-hero{height:100dvh;max-height:none}
+body.zen .timer-controls{opacity:0;transition:opacity .3s}
+body.zen .timer-controls:hover{opacity:1}
+@media(min-width:1600px){.big-clock,.timer-number{font-size:clamp(280px,24vw,460px)}}
+@media(max-width:1000px){.big-clock,.timer-number{font-size:25vw}.focus-top{top:118px}.clock-view{min-height:calc(100dvh - 98px);padding:0 5% 30px}}
+@media(max-width:650px){.big-clock,.timer-number{font-size:26vw;letter-spacing:-.055em}.clock-view .big-clock{font-size:29vw}.clock-view{min-height:calc(100dvh - 132px);padding:0 6% 28px}.clock-view .clock-hero{min-height:255px;padding:30px 0}.dashboard .plan-card,.dashboard .focus-card{height:370px;min-height:370px;padding:23px}.dashboard .mini-time{font-size:66px}.focus-top{top:154px;width:100%;gap:12px}.timer-controls{bottom:45px;gap:20px}.start-button{padding:16px 27px;min-width:150px;font-size:13px}.timer-number.approx{font-size:20vw}.plans-heading h1{font-size:23px}.color-grid{gap:10px}dialog .setting-row{font-size:11px}.pip-body .pip-time{font-size:70px}}
