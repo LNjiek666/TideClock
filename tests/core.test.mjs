@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {defaults,freshTimer,toggleTimer,remaining,takeCompletion,advance,formatTime} from '../dist/core.js';
+test('absolute deadline survives delayed background ticks and serialization',()=>{let t=freshTimer();toggleTimer(t,1000);t=JSON.parse(JSON.stringify(t));assert.equal(remaining(t,61000),1440000);assert.equal(remaining(t,1502000),-1000);});
+test('pause/resume preserves remaining time without accumulating idle time',()=>{const t=freshTimer();toggleTimer(t,1000);toggleTimer(t,61000);assert.equal(remaining(t,999999),1440000);toggleTimer(t,1000000);assert.equal(remaining(t,1001000),1439000);});
+test('completion is idempotent and captures only tasks completed in the current session',()=>{const t=freshTimer();toggleTimer(t,1000);const tasks=[{id:'a',text:'old',done:true,doneAt:500},{id:'b',text:'new',done:true,doneAt:10000},{id:'c',done:false,doneAt:10000}];assert.equal(takeCompletion(t,tasks,5000),null);const report=takeCompletion(t,tasks,1501000);assert.deepEqual(report.completed,[{id:'b',text:'new'}]);assert.equal(takeCompletion(t,tasks,1502000),null);});
+test('four completed work sessions lead to a long break, skips do not count',()=>{let t=freshTimer();for(let i=0;i<4;i++){t.handled=true;t=advance(t,defaults);assert.equal(t.mode,i===3?'long':'short');assert.equal(t.round,i+1);t=advance(t,defaults);assert.equal(t.mode,'work');}t=advance(t,defaults);assert.equal(t.round,4);});
+test('overtime formatting and custom durations',()=>{assert.equal(formatTime(-61000),'+01:01');assert.equal(formatTime(0),'00:00');assert.equal(freshTimer({...defaults,work:50}).remaining,3000000);});
